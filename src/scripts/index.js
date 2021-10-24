@@ -23,6 +23,14 @@ const initialState = function() {
 };
 
 /**
+ * Функция выводит информацию об ошибке в консоль
+ * @param {Object} err - Объект ошибки
+ */
+ const basicErrorHandler = function(err) {
+    console.error(err);
+}
+
+/**
  * Функция запрашивает картинки для галереи
  * и вызывает ф-цию отрисовки полученных картинок
  * @param {number} page
@@ -36,7 +44,11 @@ const getPictures = function(page = 1, limit = 10) {
         })
         .then(function(result) {
             renderPictures(result);
-        });
+        })
+        .catch(err => {
+            basicErrorHandler(err)
+        })
+        .finally(() => hideLoader())
 };
 
 /**
@@ -52,7 +64,11 @@ const getPictureInfo = function(id = 0) {
         })
         .then(function(result) {
             renderPopupPicture(result);
-        });
+        })
+        .catch(err => {
+            basicErrorHandler(err)
+        })
+        .finally(() => hideLoader())
 };
 
 /**
@@ -115,7 +131,6 @@ const renderPictures = function(list) {
     });
 
     container.appendChild(fragment);
-    hideLoader();
 };
 
 /**
@@ -137,7 +152,6 @@ const renderPopupPicture = function(picture) {
 
     popupContainer.innerHTML = '';
     popupContainer.appendChild(clone);
-    hideLoader();
     togglePopup();
 };
 
