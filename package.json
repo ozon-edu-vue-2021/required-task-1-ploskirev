@@ -34,5 +34,15 @@
         "hooks": {
             "pre-commit": "pretty-quick --pattern=\"src/**/*.*\""
         }
+    },
+    "prettier": {
+        "printWidth": 80,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "bracketSpacing": true,
+        "tabWidth": 4,
+        "semi": true,
+        "arrowParens": "avoid",
+        "endOfLine": "lf"
     }
 }
